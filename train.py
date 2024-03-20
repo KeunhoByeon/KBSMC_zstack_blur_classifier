@@ -160,10 +160,10 @@ def run(args):
             val(epoch, model, criterion, val_loader, logger=logger)
             save_state_dict(os.path.join(save_dir, '{}.pth'.format(epoch)), epoch, model, optimizer, scheduler)
 
-        val("TEST", model, criterion, test_loader, logger=None)
-
         # Scheduler Step
         scheduler.step()
+
+    val("TEST", model, criterion, test_loader, logger=logger)
 
 
 if __name__ == '__main__':
