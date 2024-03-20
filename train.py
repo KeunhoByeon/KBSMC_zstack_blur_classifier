@@ -153,7 +153,7 @@ def run(args):
     os.makedirs(save_dir, exist_ok=True)
     for epoch in range(args.start_epoch, args.epochs):
         # Train
-        train(args, epoch, model, criterion, optimizer, train_loader, logger=logger, lr=scheduler.get_lr()[0])
+        train(args, epoch, model, criterion, optimizer, train_loader, logger=logger, lr=scheduler.get_last_lr()[0])
 
         # Validation
         if epoch % args.val_freq == 0 or epoch == args.epochs - 1:
@@ -186,7 +186,7 @@ if __name__ == '__main__':
     parser.add_argument('--seed', default=103, type=int, help='seed for initializing training.')
     # Validation and Debugging Arguments
     parser.add_argument('--val_freq', default=1, type=int, help='validation frequency')
-    parser.add_argument('--print_freq', default=5000, type=int, help='print frequency')
+    parser.add_argument('--print_freq', default=10000, type=int, help='print frequency')
     parser.add_argument('--print_confusion_mat', default=False, action='store_true')
     parser.add_argument('--result', default='results_classifier', type=str, help='path to results')
     parser.add_argument('--tag', default=None, type=str)
