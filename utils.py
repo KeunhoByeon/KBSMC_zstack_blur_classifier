@@ -1,8 +1,11 @@
+import os
+
 import cv2
 import torch
 
 
 def save_state_dict(save_path, epoch, model, optimizer=None, scheduler=None):
+    os.makedirs(os.path.dirname(save_path), exist_ok=True)
     torch.save({'epoch': epoch, 'model_state': model.state_dict(),
                 'optimizer_state': optimizer.state_dict() if optimizer is not None else None,
                 'scheduler_state': scheduler.state_dict() if scheduler is not None else None, }, save_path)
